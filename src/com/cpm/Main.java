@@ -18,7 +18,10 @@ public class Main {
         String output = "";
         String result = "";
 
-        String input = "pABC,pDEF,pGHI,u5000,c,pXYZ";
+        Scanner sc = new Scanner( System.in );
+
+        System.out.println( "Enter an input string to process ....\n" );
+        String input = sc.nextLine();
 
         String[] splitLicensePlate = input.split( "," );
 
@@ -62,12 +65,13 @@ public class Main {
             }
         }
 
+        System.out.println( "Input => " + " " + input );
+        System.out.println( "Output => " + " " + output );
         System.out.println( "Free Parking Slot => " + " " + freeSpace );
         System.out.println( "Taken Parking Slot => " + " " + takenSpace );
         System.out.println( "Car Parking Map (Before) => " + " " + carDataMapClone );
         System.out.println( "Car Parking Map (After)  => " + " " + carDataMap );
-        System.out.println( "Input => " + " " + input );
-        System.out.println( "Output => " + " " + output );
+
 
     }
 }
