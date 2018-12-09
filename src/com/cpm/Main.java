@@ -1,6 +1,7 @@
 package com.cpm;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Main {
 
@@ -26,14 +27,14 @@ public class Main {
 
         do{
             if(splitLicensePlate[i].startsWith( "p" )){
-                String[] moreSplit = splitLicensePlate[i].split( "p" );
-                carDataMap.put(ticketNo,moreSplit[1]);
-                carDataMapClone.put(ticketNo,moreSplit[1]);
+                String[] licensePlate = splitLicensePlate[i].split( "p" );
+                carDataMap.put( ticketNo, licensePlate[1] );
+                carDataMapClone.put( ticketNo, licensePlate[1] );
                 ticketNo++;
             }
             if(splitLicensePlate[i].startsWith( "u" ) && splitLicensePlate[i+1].equalsIgnoreCase( "c" )){
-                String[] moreSplit = splitLicensePlate[i].split( "u" );
-                int key = Integer.parseInt( moreSplit[1] );
+                String[] licensePlate = splitLicensePlate[i].split( "u" );
+                int key = Integer.parseInt( licensePlate[1] );
                 if(carDataMap.containsKey(key)){
                     carDataMap.remove(key);
                 } else {
