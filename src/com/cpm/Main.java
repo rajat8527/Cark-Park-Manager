@@ -11,14 +11,14 @@ public class Main {
 
         ArrayList<String> carDataList = new ArrayList<>(  );
 
-        String[] parkingSlots;
-        parkingSlots = new String[10];
+
+        ArrayList<String> parkingSlots = new ArrayList<>(Arrays.asList(new String[11]));
 
         int ticketNo = 5000;
         String output = "";
         String result = "";
 
-        String input = "pABC,pDEF,pGHI,u5000,c";
+        String input = "pABC,pDEF,pGHI,u5000,c,pXYZ";
 
         String[] splitLicensePlate = input.split( "," );
 
@@ -27,7 +27,7 @@ public class Main {
         do{
             if(splitLicensePlate[i].startsWith( "p" )){
                 String[] moreSplit = splitLicensePlate[i].split( "p" );
-                parkingSlots[i] = String.valueOf( ticketNo );
+                parkingSlots.set(i,String.valueOf(ticketNo));
                 carDataMap.put(ticketNo,moreSplit[1]);
                 carDataMapClone.put(ticketNo,moreSplit[1]);
                 ticketNo++;
@@ -36,6 +36,9 @@ public class Main {
                 String[] moreSplit = splitLicensePlate[i].split( "u" );
                 int key = Integer.parseInt( moreSplit[1] );
                 if(carDataMap.containsKey(key)){
+                    if(parkingSlots.contains( String.valueOf( key ) )){
+                        parkingSlots.remove( String.valueOf( key ) );
+                    }
                     carDataMap.remove(key);
                 } else {
                     System.out.println("Car with ticket no"+" "+key+" "+"is not parked here !");
@@ -48,18 +51,18 @@ public class Main {
             result += values + ",";
             output = result.replace( "p","" );
         }
+
         String freeSpace = "";
         String takenSpace = "";
-        for(int w=0; w<parkingSlots.length; w++){
-            if((parkingSlots[w] == null) || (parkingSlots[w].trim().length() == 0)){
+
+        for(int w=0; w<parkingSlots.size(); w++){
+            if((parkingSlots.get( w ) == null )){
                 freeSpace += "Slot" + " " + String.valueOf(w) + ",";
             }
             else{
                 takenSpace += "Slot" + " " + String.valueOf(w) + ",";
             }
         }
-
-        String spaceStatus = freeSpace + takenSpace;
 
         System.out.println( "Free Parking Slot => " + " " + freeSpace );
         System.out.println( "Taken Parking Slot => " + " " + takenSpace );
