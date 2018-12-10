@@ -40,7 +40,7 @@ public class Main {
             do {
                 if ( splitLicensePlate[i].startsWith( "p" ) ) {
                     String[] licensePlate = splitLicensePlate[i].split( "p" );
-                    if(flag < 10){
+                    if(flag < parkingSlots.length){
                         parkingSlots[flag] = String.valueOf( ticketNo );
                         carDataMap.put( ticketNo, licensePlate[1] );
                         carDataMapClone.put( ticketNo, licensePlate[1] );
@@ -48,7 +48,7 @@ public class Main {
                         flag++;
                     }
                 }
-                if ( (splitLicensePlate[i].startsWith( "u" ) && splitLicensePlate[i + 1].equalsIgnoreCase( "c" )) || splitLicensePlate[i].startsWith( "u" )) {
+                if ( splitLicensePlate[i].startsWith( "u" ) && splitLicensePlate[i + 1].equalsIgnoreCase( "c" )) {
                     String[] licensePlate = splitLicensePlate[i].split( "u" );
                     int ticket = Integer.parseInt( licensePlate[1] );
                     if ( carDataMap.containsKey(ticket ) ) {
@@ -57,7 +57,6 @@ public class Main {
                             parkingSlots = parkingSlots1.toArray(parkingSlots);
                             carDataMap.remove( ticket );
                             flag--;
-
                     } else {
                         System.out.println( "Car with ticket no" + " " + ticket + " " + " not found !" );
                     }
