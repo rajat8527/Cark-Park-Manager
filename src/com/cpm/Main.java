@@ -11,8 +11,9 @@ public class Main {
         //Clone of the above map to show the changes in the map
         HashMap<Integer, String> carDataMapClone = new HashMap<Integer, String>();
 
-        //Array List to track parking slots availability
-        ArrayList<String> parkingSlots = new ArrayList<>( Arrays.asList( new String[10] ) );
+        //Array to track parking slots availability
+        String[] parkingSlots;
+        parkingSlots = new String[10];
 
         //ticket number initialized at 5000
         int ticketNo = 5000;
@@ -33,24 +34,32 @@ public class Main {
         String[] splitLicensePlate = input.split( "," );
 
         int i = 0;
-
+        int flag = 0;
         try {
+
             do {
                 if ( splitLicensePlate[i].startsWith( "p" ) ) {
                     String[] licensePlate = splitLicensePlate[i].split( "p" );
-                    parkingSlots.set( i, String.valueOf( ticketNo ) );
-                    carDataMap.put( ticketNo, licensePlate[1] );
-                    carDataMapClone.put( ticketNo, licensePlate[1] );
-                    ticketNo++;
+                    if(flag < 10){
+                        parkingSlots[flag] = String.valueOf( ticketNo );
+                        carDataMap.put( ticketNo, licensePlate[1] );
+                        carDataMapClone.put( ticketNo, licensePlate[1] );
+                        ticketNo++;
+                        flag++;
+                    }
                 }
-                if ( splitLicensePlate[i].startsWith( "u" ) && splitLicensePlate[i + 1].equalsIgnoreCase( "c" ) ) {
+                if ( (splitLicensePlate[i].startsWith( "u" ) && splitLicensePlate[i + 1].equalsIgnoreCase( "c" )) || splitLicensePlate[i].startsWith( "u" )) {
                     String[] licensePlate = splitLicensePlate[i].split( "u" );
-                    int key = Integer.parseInt( licensePlate[1] );
-                    if ( carDataMap.containsKey( key ) ) {
-                        parkingSlots.remove( String.valueOf( key ) );
-                        carDataMap.remove( key );
+                    int ticket = Integer.parseInt( licensePlate[1] );
+                    if ( carDataMap.containsKey(ticket ) ) {
+                            ArrayList<String> parkingSlots1 = new ArrayList<>( Arrays.asList( parkingSlots ) );
+                            parkingSlots1.remove(String.valueOf( ticket ));
+                            parkingSlots = parkingSlots1.toArray(parkingSlots);
+                            carDataMap.remove( ticket );
+                            flag--;
+
                     } else {
-                        System.out.println( "Car with ticket no" + " " + key + " " + " not found !" );
+                        System.out.println( "Car with ticket no" + " " + ticket + " " + " not found !" );
                     }
                 }
                 i++;
@@ -64,8 +73,8 @@ public class Main {
             output = result.replace( "p", "" );
         }
 
-        for (int w = 0; w < parkingSlots.size(); w++) {
-            if ( (parkingSlots.get( w ) == null) ) {
+        for (int w = 0; w < parkingSlots.length; w++) {
+            if ( (parkingSlots[w] == null) ) {
                 freeSpace += "Slot" + " " + String.valueOf( w ) + ",";
             } else {
                 takenSpace += "Slot" + " " + String.valueOf( w ) + ",";
@@ -78,7 +87,5 @@ public class Main {
         System.out.println( "Taken Parking Slot => " + " " + takenSpace );
         System.out.println( "Car Parking Map (Before) => " + " " + carDataMapClone );
         System.out.println( "Car Parking Map (After)  => " + " " + carDataMap );
-
-
     }
 }
