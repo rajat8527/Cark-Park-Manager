@@ -48,7 +48,7 @@ public class Main {
                         flag++;
                     }
                 }
-                if ( splitLicensePlate[i].startsWith( "u" ) && splitLicensePlate[i + 1].equalsIgnoreCase( "c" )) {
+                if ((splitLicensePlate[i].startsWith( "u" ) && splitLicensePlate[i + 1].equalsIgnoreCase( "c" ))||splitLicensePlate[i].startsWith( "u" )) {
                     String[] licensePlate = splitLicensePlate[i].split( "u" );
                     int ticket = Integer.parseInt( licensePlate[1] );
                     if ( carDataMap.containsKey(ticket ) ) {
