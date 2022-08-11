@@ -4,9 +4,7 @@ A small java application that tries to solve the common use cases of cark parkin
 
 ## Problem statement
 
-There is a car park and it has a total of 10 available spaces in a prime area of town that’s within walking distance of the high street. As part of your 
-new position you’ve decided to write a management system to offload the day-to-day activity so you can enjoy the finer things in life. After a quick 
-brainstorm you’ve settled on the following functionality to make your life easier: 
+There is a car park and it has a total of 10 available spaces in a prime area of town that’s within walking distance of the high street. Design a system to offload the day-to-day activity so you can enjoy the finer things in life. After a quick brainstorm you’ve settled on the following functionality to make your life easier: 
 
 ## Park 
 
